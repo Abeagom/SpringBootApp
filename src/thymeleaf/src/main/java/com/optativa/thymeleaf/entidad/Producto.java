@@ -1,9 +1,14 @@
 package com.optativa.thymeleaf.entidad;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
 public class Producto {
 		//añadios ID
 		private int id;
+		@NotBlank(message="El nombre no puede estar vacío")
 		private String nombre;
+		@Positive(message="El precio debe ser positivo")
 		private double precio;
 		private String categoria;
 		
