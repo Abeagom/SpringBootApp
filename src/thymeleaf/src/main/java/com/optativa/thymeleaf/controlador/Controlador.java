@@ -43,11 +43,6 @@ public class Controlador {
 		return "lista";
 	}
 	
-	@PostMapping("/productos")
-	public String guardar(@Valid @ModelAttribute("producto") Producto producto, BindingResult bindingResult, Model model) {
-		return "formulario";
-	}
-	
 	 @GetMapping("/productos/{id}")
 	 public String obtenerProducto(@PathVariable int id, Model model) {
 		 model.addAttribute("producto", servicio.obtenerProductoPorId(id));
@@ -59,8 +54,11 @@ public class Controlador {
 		    return "formulario";
 		}
 	 @PostMapping("/formulario")
-	 public String obtenerFormulario(Producto producto, Model model) {
+	 public String obtenerFormulario(@Valid @ModelAttribute Producto producto, BindingResult bindingResult , Model model) {
 		 System.out.println(producto.toString());
+		 if(bindingResult.hasErrors()) {
+			 return "/formulario";
+		 }
 		 servicio.agregarProducto(producto);
 			model.addAttribute("listaProductos", servicio.obtenerProductos());
 
