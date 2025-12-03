@@ -48,6 +48,14 @@ public class Controlador {
 		 model.addAttribute("producto", servicio.obtenerProductoPorId(id));
 		 return "vista";
 	 }
+	 
+	 @GetMapping("/productos/{id}/editar")
+	 public String editarProducto(@PathVariable int id, Model model) {
+		 Producto p = servicio.obtenerProductoPorId(id);
+		 model.addAttribute("producto", p);
+		 return "vista";
+	 }
+	 
 	 @GetMapping("/formulario")
 	 public String mostrarForm(Model model) {
 		    model.addAttribute("producto", new Producto());
@@ -60,7 +68,7 @@ public class Controlador {
 			 return "/formulario";
 		 }
 		 servicio.agregarProducto(producto);
-			model.addAttribute("listaProductos", servicio.obtenerProductos());
+		 model.addAttribute("listaProductos", servicio.obtenerProductos());
 
 		 return "lista";
 	 }
